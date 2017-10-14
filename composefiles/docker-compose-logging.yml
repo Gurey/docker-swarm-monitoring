@@ -22,6 +22,8 @@ services:
             labels:
                 com.docker.stack.namespace: "logging"
                 com.docker.service.name: "elasticsearch"
+            placement:
+                constraints: [node.role == manager]
 
     logstash:
         image: logstash:latest
