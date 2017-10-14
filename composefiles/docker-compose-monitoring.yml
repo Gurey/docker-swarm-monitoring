@@ -28,6 +28,8 @@ services:
             labels:
                 com.docker.stack.namespace: "monitoring"
                 com.docker.service.name: "prometheus"
+            placement:
+                constraints: [node.role == manager]
 
     cadvisor:
         image: google/cadvisor:latest
@@ -82,7 +84,7 @@ services:
                 max_attempts: 5
             labels:
                 com.docker.stack.namespace: "monitoring"
-                com.docker.service.name: "node-exporter"              
+                com.docker.service.name: "node-exporter"
 
     alertmanager:
         image: prom/alertmanager
@@ -109,6 +111,8 @@ services:
             labels:
                 com.docker.stack.namespace: "monitoring"
                 com.docker.service.name: "alertmanager"
+            placement:
+                constraints: [node.role == manager]
     
     elastalert:
         image: ivankrizsan/elastalert:0.1.8
@@ -142,7 +146,9 @@ services:
                 max_attempts: 5
             labels:
                 com.docker.stack.namespace: "monitoring"
-                com.docker.service.name: "elastalert"            
+                com.docker.service.name: "elastalert"
+            placement:
+                constraints: [node.role == manager]         
 
     grafana:
         image: grafana/grafana
@@ -169,6 +175,8 @@ services:
             labels:
                 com.docker.stack.namespace: "monitoring"
                 com.docker.service.name: "grafana"
+            placement:
+                constraints: [node.role == manager]
 
 networks:
     logging:
